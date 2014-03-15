@@ -1731,170 +1731,185 @@ text-align: inherit;
 <body>
 <div class="reveal">
 <div class="slides">
-<aside class="notes">
+<div style=display:none>
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>SWC bootcamp intro slide deck</p>
-<p>Developed by Christina Koch and Bernhard Konrad</p>
+<p>Original acknowledgements: With help from Ariel Rokem, Julia Gustavsen, Fernando Perez, Karthik Ram, Matthew Brett and illustrations from Scott Chacon's pro-git book</p>
+<p>Modifed by Christina Koch, original file by Jenny Bryan via Bernhard Konrad</p>
 </div>
-    </aside></section>
+    </div></section>
     </section><section>
     <section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<div align="center">
-<font size="26">Hello and welcome to</font>
-</div>
-<div align="center">
-<img src="http://www.data2semantics.org/bootcamp/img/software-carpentry-logo.png" width="40%" height="40%"/>
-</div>
-<br>
-<div align="center">
-<font size="36">@ </font>
-</div>
-<br>
-<div align="center">
-<img src="http://www.ritualspacesandplaces.com/resources/lab6-logo.png" width="40%" height="40%"/>
-</div>
+<h1 id="intro-to-practical-version-control-for-scientists">Intro to practical version control for scientists</h1>
+</div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="http://www.phdcomics.com/comics/archive/phd101212s.gif" width="60%"></p>
+<p>&quot;Piled Higher and Deeper&quot; by Jorge Cham, http://www.phdcomics.com</p>
+</div>
+    </div></section>
+    </section><section>
+    <section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="who-here-uses-a-version-control-system">Who here uses a version control system?</h2>
 </div></section>
     </section><section>
     <section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="questions">Questions</h2>
-<p>Surveying almost 2000 Scientists in 2008 with the following questions:</p>
-<ul>
-<li><p>How do you use computers?</p></li>
-<li><p>How did you learn what you know?</p></li>
-</ul>
-</div></section><section>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="answers">Answers</h2>
-<ul>
-<li><p>On average they spend 40% of their time building or using software.</p></li>
-<li><p>More than half say this number is increasing.</p></li>
-<li><p>26% say that what they know is <strong>mostly self-taught</strong></p></li>
-</ul>
+<h3 id="what-is-version-control-and-what-does-it-do-for-us">What is version control and what does it do for us?</h3>
 </div><div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Oh, wait. That last number there should read <em><font color="red"> 96% </font> of Scientists say that what they know about computers is mostly self-taught.</em></li>
+<li>Reproducibility : logging of every step, complete project history</li>
 </ul>
 </div>
-    </div><aside class="notes">
+    </div><div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There's nothing wrong with learning things on your own. However, it is likely that learning about computers on your own means that there are gaps in your knowledge - things you just don't know, or ways in which you are not using your computing tools most effectively.</p>
+<ul>
+<li>Peace of mind : a robust backup system of changing files</li>
+</ul>
 </div>
-    </aside></section><section>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>###...so what are we doing here?</p>
-</div><aside class="notes">
+    </div><div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Software Carpentry exists to fix, or at least improve this situation, by giving scientists formal instruction in computing tools. The following video - while not directly about computers - captures the philosophy that we're trying to share.</p>
-<p>(Can start the video below around ~1:00 if you're short on time)</p>
+<ul>
+<li>Collaboration : synchronize same files across multiple computers/people</li>
+</ul>
 </div>
-    </aside></section><section>
+    </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="the-height-of-functionality">The Height of Functionality</h2>
-<iframe src="//player.vimeo.com/video/68558518" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p>
-<a href="http://vimeo.com/68558518">GIZMODO - The Wildly Functional Studio of Video Wizard Casey Neistat, Part 1</a> from <a href="http://vimeo.com/gizmodo">Gizmodo</a> on <a href="https://vimeo.com">Vimeo</a>.
-</p>
-
-</div></section><section>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><font size="6"> It's just pure functionality; </font></p>
-<p><br></p>
-<p><font size="6"> I mean, there’s so much s*** in here; all of it’s used, otherwise it wouldn’t be in here, and you have to keep track of it. </font></p>
-<p><br></p>
-<p><font size="6"> So every minute that I spend looking for, like, velcro tape, or my drill gun, is a minute I’m not doing something productive so why not build an infrastructure that supports that rather than encourages the chaos. </font></p>
-</div></section><section>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="studio-space-for-scientist-statistician-mathematician-etc...-a-computer">studio space for scientist, statistician, mathematician, etc... = a computer</h3>
+<h3 id="example-version-control-on-mediawiki">Example: version control on MediaWiki</h3>
+<p><a href="http://wiki.ubc.ca/Science:Math_Exam_Resources">Math Exam Resources wiki</a></p>
 </div></section>
     </section><section>
     <section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="software-carpentrys-goal-is-to-make-scientists-and-engineering-more-productive-by-teaching-them-basic-computing-skills.">Software Carpentry's goal is to make scientists and engineering more productive by teaching them basic computing skills.</h3>
-</div><aside class="notes">
-    
+<h1 id="before...">Before...</h1>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Just like Casey Neistat has organized his studio in a way that optimizes his productivity, our goal is to &quot;organize&quot; your computer in a way that allows you to be the most productive (could include, reproducible, etc.) scientist you can be.</p>
-</div>
-    </aside><div class="fragment">
-    
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/1.png" width="80%"></p>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>learning about...</p>
-<ul>
-<li>organization schemes (automation, version control)</li>
-<li>tool-building (scripting, programming)</li>
-<li>tools (python, shell, git)</li>
-</ul>
-</div>
-    </div><aside class="notes">
-    
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/2.png" width="80%"></p>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So like Casey Neistat's studio, we'll be organizing, giving you some tools, and the ability to create your own tools. Note that the order of this list is deliberate - this is not a &quot;python&quot; workshop or a &quot;git&quot; workshop. More tools without processes will just be more crap in your studio, your computer. We'll be learning about these tools as part of our workshop, but we'll be focusing more on processes and ways of thinking that can transform the way you interact with your tools and which tools you use. Best practice is our byword here.</p>
-</div>
-    </aside><div class="fragment">
-    
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/3.png" width="80%"></p>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>in order to...</p>
-<ul>
-<li>automate repetitive tasks</li>
-<li>track and share their work</li>
-<li>build programs in a modular, testable, and reusable way</li>
-</ul>
-</div>
-    </div><aside class="notes">
-    
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/4.png" width="80%"></p>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On the ground, these are things you should be able to do at the end of the workshop - or at least know how to do them and be convinced that they are best practices.</p>
-<p>Obviously, these are quite lofty goals, and (fellow instructors) and I are not &quot;professional&quot; instructors, although we all have training and experience in doing this kind of thing. Also, you all (usually) come from different backgrounds and experience levels, so there will be times today where you are lost or bored or both. We'll try to find a pace that works for most people, and teach in such a way that we achieve these goals of competency with you. Just know that we're in this learning experience together, trying to make it work for everyone. My goal, at the end of our two days, is to have given you enough information that you can go on and keep learning on your own, and enough reasons for these practices that you actually go out and implement them.</p>
-</div>
-    </aside></section>
+<p><img src="http://disinfo.s3.amazonaws.com/wp-content/uploads/2013/11/huh.jpg" width="80%"></p>
+</div></section>
     </section><section>
     <section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="housekeeping">Housekeeping</h2>
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/meanwhileInVC.png" width="80%"></p>
 </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="todays-topics">Today's topics</h3>
-<ul>
-<li>Intro to shell</li>
-<li>Intro to version control with git (locally)</li>
-<li>Ditto, but remotely</li>
-<li>Automation and shell scripting</li>
-<li>Intro to python, with ipython blocks</li>
-</ul>
-<p>Breaks in morning/afternoon, hour for lunch</p>
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/better1.png" width="80%"></p>
 </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="sticky-notes">Sticky Notes</h3>
-<p>Easy visual feedback for instructors.</p>
-<ul>
-<li><font color="red">If you are lost, confused, or need help, put the red sticky up on your laptop.</font></li>
-<li><font color="green">If all is well, put up the green sticky.</font></li>
-</ul>
-<p><em>Please asks questions immediately. Don't fall behind.</em></p>
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/better2.png" width="80%"></p>
 </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="etherpad">Etherpad</h3>
-<p><a href="https://etherpad.mozilla.org/2014-02-swc-sfu-python">Click.</a></p>
-<ul>
-<li>Easy to share code and useful links.</li>
-<li>Share notes with everyone</li>
-<li>Ask questions.</li>
-</ul>
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/better3.png" width="80%"></p>
 </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="tools">Tools</h3>
-<p>Things you want to have open:</p>
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/better4.png" width="80%"></p>
+</div></section><section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/better5.png" width="80%"></p>
+</div></section><section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="http://www.math.ubc.ca/~konradbe/swc-git/better1.png" width="80%"></p>
+</div></section>
+    </section><section>
+    <section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="side-benefits-from-version-control">Side benefits from Version Control</h3>
+</div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Bootcamp etherpad</li>
-<li>Note-taking device (if desired, all material will be available online afterwards)</li>
+<li>no overwrites / nothing is ever lost</li>
+<li>blame is evident</li>
+<li>freedom to experiment</li>
+<li>one copy (with versions) of file facilitates collaboration</li>
 </ul>
-<p><img src="http://rebeccaberto.files.wordpress.com/2012/07/twitter-bird.jpg" width="10%" height="10%"/> If you're on twitter <em>(not during a lesson, of course)</em>, tweet at <span class="citation">@swcarpentry</span> or use the hashtag #SWCSFU</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="can-i-only-use-this-for-code">Can I only use this for code?</h3>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Version control works for any file format (code, pdfs, docs, xls, jpg, etc.)</li>
+<li>... but works <strong>best</strong> for text-based files (txt, Python, R, Matlab, any other code)</li>
+</ul>
+</div>
+    </div></section>
+    </section><section>
+    <section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="introducing-git">Introducing <code>git</code></h2>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will be using git</p>
+<p><img src="https://github-camo.global.ssl.fastly.net/233e6dc4e0b7db13dea0ee1164c9eaac875269db/687474703a2f2f636c2e6c792f31493233336a316c3258336333313143314331482f4769742d4c6f676f2d32436f6c6f722e706e67" width="30%">                <img src="http://git-scm.com/images/branching-illustration@2x.png" width="30%"></p>
+<p>There are many others (subversion, mercurial, bazaar, etc.)</p>
+</div></section>
+    </section><section>
+    <section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="how-are-we-going-to-learn-how-to-use-git">How are we going to learn how to use git?</h3>
+</div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Simple git commands on the command line.</li>
+<li>How to collaborate using <em>github</em> <img src="http://wptavern.com/wp-content/uploads/2013/10/github-logo.png" width="20%"></li>
+</ul>
+</div>
+    </div></section><section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="our-overall-goal-the-basics">our overall goal: the basics</h3>
+<p><img src="http://img2.timeinc.net/ew/i/2013/01/13/DEATH-STAR_510x510.jpg" width="35%"></p>
+<h3 id="incomplete-but-still-fully-armed-and-operational">incomplete, but still &quot;fully armed and operational&quot;</h3>
+</div></section>
+    </section><section>
+    <section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="the-official-goals-of-this-session">The official goals of this session:</h2>
+<ol style="list-style-type: decimal">
+<li>Explain which initialization and configuration steps are required once per machine, and which are required once per repository.</li>
+<li>Go through the modify-add-commit cycle for single and multiple files and explain where information is stored at each stage.</li>
+<li>Identify and use Git revision numbers.</li>
+<li>Compare files with old versions of themselves.</li>
+<li>Restore old versions of files.</li>
+<li>Configure Git to ignore specific files, and explain why it is sometimes useful to do so.</li>
+</ol>
+<p>From <a href="http://software-carpentry.org/v5/novice/git/01-backup.html">SWC - backup</a></p>
+</div></section>
+    </section><section>
+    <section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="the-official-goals-of-this-session">The official goals of this session:</h2>
+<ol style="list-style-type: decimal">
+<li>Explain what remote repositories are and why they are useful.</li>
+<li>Explain what happens when a remote repository is cloned.</li>
+<li>Explain what happens when changes are pushed to or pulled from a remote repository.</li>
+<li>Explain what conflicts are and when they can occur.</li>
+<li>Resolve conflicts resulting from a merge.</li>
+<li>Describe the steps required to submit a pull request</li>
+</ol>
+<p>From <a href="http://software-carpentry.org/v5/novice/git/02-collab.html">SWC - collaboration</a> and <a href="http://software-carpentry.org/v5/novice/git/03-conflict.html">SWC - conflicts</a></p>
 </div>
 </div>
 </div>

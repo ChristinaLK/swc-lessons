@@ -1,0 +1,1 @@
+ipython nbconvert your_slides.ipynb --to slides --post serve
