@@ -11,17 +11,20 @@
 These are steps that only need be performed once.  Configuration.  
 Do this and forget about it.  If you ever need to do it again, you can google.  
 
-`
+~~~
 $ git config --global user.name “Christina Koch”
+
 $ git config --global user.email "koch.christinal@gmail.com"
+
 $ git config --global color.ui "auto"
+
 $ git config --global core.editor "nano"
-`
+~~~
 
 This type of configuration only needs to be done once--ever, unless you delete and reinstall git.  
 
 > Describe the course of the lesson - tracking local changes before the break, syncing 
-with a remote repository before lunch.  Mention that commands are listed in git-reference.  
+with a remote repository before lunch.  Mention that commands are listed in git-commands.  
 
 ##Local
 
@@ -43,16 +46,23 @@ Click through slides on screen - this is the basic cycle of version control: cre
 adding/committing files, modifying files, adding committing files, etc.  So now we’re going to do this 
 with commands in the bash shell.  Make sure everyone is in moved folder.  
 
+~~~
 $git init
+~~~
 
 This creates our repository (the “folder” on my computer OR my camera)
 
+~~~
 $ls -a
+~~~
 
 Look at current status:
 
+~~~
 $git status
+
 $git add -A
+~~~
 
 This adds modified files (the “changeset”) to our staging area (standing up)
 
@@ -66,6 +76,7 @@ $git status
 Have them create a shell script that finds rows w/ the work “Question,” top 10 rows
 
 $notepad nearest_planets.sh
+
 grep “Question” Analytics_Fall2013.csv | head
 
 $git status
@@ -73,11 +84,13 @@ $git status
 Notice that our file is listed there.  
 
 $git add top_10.sh
+
 $git status
 
 File has moved - it’s now in the staging area (standing up) and is ready to be committed (captured)
 
 $git commit -m “adding git notes”
+
 $git status
 
 Everything is up-to-date!
@@ -128,8 +141,6 @@ $git status
 Final small task - maybe there are some files you don’t want to be tracking or versioning.  
 Common examples: auxiliary files, automatically generated, etc.  
 
-> Show them my latex file directory).  
-
 We can tell git to ignore these files by creating, appropriately enough, a file called “.gitignore.”  
 
 $notepad .gitignore
@@ -148,7 +159,7 @@ We can see that the file is not being tracked.  If you change the .gitignore fil
 
 Word to the wise: hard to untrack a file once it’s been tracked.  Do this right away! 
 
-> Take a quick 2 minute break, have folks take notes in the git-commands document and commit their changes.  
+> Take a quick 4 minute break, have folks take notes in the git-commands document and commit their changes.  
 
 ### Restoring Files (checkout part one)
 
@@ -201,10 +212,25 @@ worksheet?
 
 ### Merging
 
+The same merging problem can occur locally.  Make changes on one branch, then another, then merge branches.  
 
-> Longer break, make sure everyone has github account
+$git branch name
+
+$git checkout name
+
+make changes, add, commit
+
+$git checkout master
+
+make changes, add, commit
+
+$git merge name
+
+> Longer break (10:30 - 11:00), make sure everyone has github account
 
 ##Git Remote
+
+Recap where we've been.  Now we're going to move online - like google documents or dropbox.  
 
 ###Creating + connecting remote repositories
 
@@ -231,7 +257,11 @@ We do this with push/pull commands.  To push your files to the “upstream” reposi
 
 ~~~
 $git push upstream master
+~~~
 
+But that doesn't work!  What's going on?  Github thinks that your remote repository is more "recent" than your local.  Luckily, this is easily fixed.  
+
+~~~
 $git pull upstream master
 
 $git status / git log --oneline
@@ -249,9 +279,13 @@ you have learned so far would be necessary to do the above task?
 (In groups, have people come up with a list of the commands, then read them out one by one)
 
 $mkdir target
+
 $cd target
+
 $git init
+
 $git remote add origin https://github.com/ChristinaLK/location
+
 $git pull origin master
 
 Someone was like: we do this all the time, we should make this into a single command.  
@@ -259,76 +293,92 @@ Hence $git clone.
 This is how we created the directory from the start of class.  
 
 $cd (directoryname)
+
 $git remote -v
+
 $git status
+
 $git log
 
 > Pause for note-taking, review, questions.  
 
-Conflicts
+###Conflicts
 
 Review: remotes, pushing, pulling// fork.  Draw a diagram on the board.  
 Get everyone into original shell directory (?).  There should be a remote called origin and a 
 remote called something else in your own directory.  Have everyone pull from her directory, push to backup
 
 $git push backup master
+
 $git pull origin master
 
 Create conflict
 
 Have everyone make a change in notes document, recall, you have to commit your changes. 
 Instructions in etherpad:
+
 1. Make a change in notes.txt - delete or add
 2. Stage + commit 
+
 $git add notes.txt, 
 $git commit -m “my notes”
 $git pull origin master
+
 If everyone edited the same document, this will be a conflict.  
 
 Try to push changes to Lynne’s repo.  
+
 $git push origin master
+
 Should fail.  Need to pull first.  
 Resolve conflicts
 
 $git pull is a combination of fetch + merge.  It’s the merge that we need to deal with now.  
 If you’re in GitBash, you’ll see (master|MERGING) - that indicates that we’re in the middle of a merge.  
 Let’s see where the conflicts are:
+
 $git diff
+
 $git status
+
 Open that document.  
+
 $notepad notes.txt
+
 Git has put in some filler text.  
 The cheap and easy way to resolve is just commit as is - do git add file and git commit -m “lazy merge”.  But that’s not actually what we want to do.  Edit the file so that it contains what you want.  You can pick among changes or make other changes.  Up to you.  Now add/commit.  
-$git add notes.txt
-$git commit -m “merging haiku document.”
-Locally (optional)
 
-The same merging problem can occur locally.  Make changes on one branch, then another, then merge branches.  
-$git branch name
-$git checkout name
-make changes, add, commit
-$git checkout master
-make changes, add, commit
-$git merge name
+$git add notes.txt
+
+$git commit -m “merging haiku document.”
+
 same process as before.  
 
-Collaborating via pull request
+###Collaborating via pull request
 
 Try pushing to the repo - can’t, don’t have permissions.  Talk about why.  
 If I want all of you to contribute - but I want to control your contribution, enter pull requests.  
 
 Fork lessons repository - explain what is happening here.  (difference between fork + branch)
 Add this fork as upstream to current repository
+
 $git remote add upstream (address)
+
 $git push upstream master
+
 In your last pull from origin, should have gotten a folder named participants.  Inside, there’s a bio text file.  Edit the file, stage, commit.  Push to your fork.  (directions in etherpad?)
+
 $notepad bio.txt
+
 $git add christina.txt
+
 $git commit -m “adding Christina’s bio”
+
 $git push upstream master
 
 Now submit pull request.  
-Workflows
+
+###Workflows
 
 Now that we have this tool, we need some best practice of how to use it.  This is the hardest part of learning a new tool, because it’s developing new habits, which is tricky.  
 Strategies: put up reminder notes? etc. etc. Use diagram on board to illustrate cycle.  
