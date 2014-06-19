@@ -44,7 +44,7 @@ Interactive exercise: explain rationale (participation, etc.)
 
 Click through slides on screen - this is the basic cycle of version control: creating a repo, 
 adding/committing files, modifying files, adding committing files, etc.  So now we’re going to do this 
-with commands in the bash shell.  Make sure everyone is in moved folder.  
+with commands in the bash shell.  Make sure everyone is in `project_files`.  
 
 ~~~
 $git init
@@ -61,42 +61,40 @@ Look at current status:
 ~~~
 $git status
 
-$git add -A
+$git add git-commands.md
 ~~~
 
 This adds modified files (the “changeset”) to our staging area (standing up)
 
 $git status
+
+$git add -A
+
 $git commit -m “initializing repository”
 
 Finally, this takes a snapshot, committing an image of all the files in the staging area (me taking a picture).
 
 $git status
 
-Have them create a shell script that finds rows w/ the work “Question,” top 10 rows
-
-$notepad nearest_planets.sh
-
-grep “Question” Analytics_Fall2013.csv | head
+Have them modify the shell script so only first line of goostats output is sent to file (pipe to head)
 
 $git status
 
 Notice that our file is listed there.  
 
-$git add top_10.sh
+$git add stats-script.sh
 
 $git status
 
 File has moved - it’s now in the staging area (standing up) and is ready to be committed (captured)
 
-$git commit -m “adding git notes”
+$git commit -m “Limiting input”
 
 $git status
 
 Everything is up-to-date!
 
-Assignment: 
-> Not sure yet.  
+> Ask for questions
 
 ### Tracking what's going on
 
@@ -118,13 +116,18 @@ Use image example - flip through the images to compare how data changed.
 It’s easy to tell which data was added because I had you write it on pink cards.  
 We can actually do this with a git command.  
 
-Add output pipe to script.  Don’t commit, don’t do anything!  Just save.  
+Add filename to output sequence  `echo $datafile >> output.txt`
+
 $git diff
+
 $git diff HEAD
+
 $git diff HEAD (filename)
 
 Now let’s commit our changes
-$git add (filename)
+
+$git add stats-script.sh
+
 $git commit -m “Adding output files”
 
 Let’s compare the previous revision (HEAD~1) w/ the first revision.  
@@ -134,7 +137,7 @@ $git diff HEAD~1 (commitval)
 
 ###Ignoring Files
 
-Run our script - produces an output file.  
+Run our script - produces an output file
 
 $git status
 
@@ -148,7 +151,9 @@ $notepad .gitignore
 add text and save
 
 $git status
+
 $git add .gitignore
+
 $git commit -m
 
 run script on different file
@@ -163,17 +168,25 @@ Word to the wise: hard to untrack a file once it’s been tracked.  Do this right 
 
 ### Restoring Files (checkout part one)
 
+Change script, to multiple output files: python goostats.py $datafile > stats-$datafile, commit changes.
+
+Run file.  Not what we wanted.  
+
+$rm stats*
+
 One of the much-touted reasons for version control is that you can’t break things.  So let’s break some things and see what happens.  
-$rm top_10.sh
-Let’s see the damage:
+
+$ls
+
 $git diff
+
 (can use HEAD or filename, but don’t have to)
 
 Our magic command is going to be called “checkout” - to change metaphors, 
 if we think of the commits as editions of a book on a shelf, we’re checking out a previous version.  
 Caution: not including filename does different things, so you really want to think of this as reverting one file at a time. 
  
-$git checkout HEAD top_10.sh
+$git checkout HEAD stats-script.sh
 
 Look at your file.  Is it back to the way it was before?  
 Let’s see what’s happening:
@@ -189,7 +202,7 @@ $git status
 
 If we want to keep this file the way it is (or was) we need to make a new commit.  So:
 
-$git commit -m “returning old analytics file”
+$git commit -m "restoring script file"
 
 Make sure you checkout the file BEFORE the problem commit, if you’re fixing something.  
 
@@ -197,34 +210,35 @@ What happens if we checkout an old commmit?
 
 ### Branching (checkout part 2) 
 
-Do a MAJOR re-edit of your paper, but don't want to lose the previous copy.  
+We want to go back and retool our output script again, but we don't want to lose our current version of the script.  
 
-Use pcottle app?  
+$git checkout (commithash)
 
-Do basic branches/merges, w/ simple file editing
-Use paperweight analogy
-Conclusion
+$git branch new-output
 
-Give everyone two minutes to take notes - put in notes file in other directory
-Take questions on etherpad
-Put links on etherpad
-worksheet?
+$git checkout new-output
 
-### Merging
+Edit script: add mkdir $1 and >> $1/stats-$filename
 
-The same merging problem can occur locally.  Make changes on one branch, then another, then merge branches.  
-
-$git branch name
-
-$git checkout name
-
-make changes, add, commit
+Draw a diagram on the board.  We can make changes in one branch independently of the other.  
 
 $git checkout master
 
-make changes, add, commit
+### Merging
 
-$git merge name
+Want to merge branches.  
+
+$git merge new-output
+
+Fix up stats script
+
+$git add stats-script.sh
+
+$git commit -m "merging in new output files"
+
+(pcottle app)
+
+> Talk about workflows (commit early, commit often or branch, edit, commit, merge)
 
 > Longer break (10:30 - 11:00), make sure everyone has github account
 
@@ -259,14 +273,12 @@ We do this with push/pull commands.  To push your files to the “upstream” reposi
 $git push upstream master
 ~~~
 
-But that doesn't work!  What's going on?  Github thinks that your remote repository is more "recent" than your local.  Luckily, this is easily fixed.  
+> Project thing
 
 ~~~
 $git pull upstream master
 
 $git status / git log --oneline
-
-$git push upstream master
 ~~~
 
 > Edit the README, commit, push upstream
@@ -302,9 +314,15 @@ $git log
 
 > Pause for note-taking, review, questions.  
 
+Have everyone clone their neighbors remote repository
+
+$git clone (https:// ... )
+
+Add some sort of file (add/commit)
+
 ###Conflicts
 
-Review: remotes, pushing, pulling// fork.  Draw a diagram on the board.  
+Review: remotes, pushing, pulling // fork.  Draw a diagram on the board.  
 Get everyone into original shell directory (?).  There should be a remote called origin and a 
 remote called something else in your own directory.  Have everyone pull from her directory, push to backup
 
@@ -399,23 +417,6 @@ basic cycle: pull, edit/add/commit, pull again, merge if necessary, push
 pull, branch, edit/add/commit, push to fork, submit pull request, pull final result
 
 Have list of scenarios - what should you do?  
-
-Have optional list of words on etherpad, so people can look it up if they get stuck.  
-Local / Remote versions?  
-
-$git init
-$git add -A
-$git add D.txt
-$git commit -m “adding files”
-$git status
-$git log or $git log --oneline
-$git diff (commit) (commit)
-$git diff (commit) (commit) D.txt
-$git branch new-branch
-$git checkout new-branch
-$git merge new-branch
-$git checkout (commit) D.txt
-$git branch or $git branch -v
 
 Review
 what are the two ways to create a repo online? (directly or via a fork)
