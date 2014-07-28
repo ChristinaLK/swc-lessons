@@ -1,5 +1,11 @@
 #Git lessons
 
+##Prep
+
+* upload project_file directory, exercises, and commands
+* have open in tabs: this file, star_logs, git_slides
+* have terminal open
+
 ##Pre-lesson exercise
 
 > file on-screen
@@ -76,25 +82,29 @@ Finally, this takes a snapshot, committing an image of all the files in the stag
 
 $git status
 
+The goostats script produces multiple numbers
+
+	bash goostats nene1729a.txt
+
 Have them modify the shell script so only first line of goostats output is sent to file (pipe to head)
 
-$git status
+	$git status
 
 Notice that our file is listed there.  
 
-$git add stats-script.sh
+	$git add stats-script.sh
 
-$git status
+	$git status
 
 File has moved - it’s now in the staging area (standing up) and is ready to be committed (captured)
 
-$git commit -m “Limiting input”
+	$git commit -m “Limiting input”
 
-$git status
+	$git status
 
 Everything is up-to-date!
 
-> Ask for questions
+> Assignment: send output from script to output.txt and commit changes
 
 ### Tracking what's going on
 
@@ -164,83 +174,7 @@ We can see that the file is not being tracked.  If you change the .gitignore fil
 
 Word to the wise: hard to untrack a file once it’s been tracked.  Do this right away! 
 
-> Take a quick 4 minute break, have folks take notes in the git-commands document and commit their changes.  
-
-### Restoring Files (checkout part one)
-
-Change script, to multiple output files: python goostats.py $datafile > stats-$datafile, commit changes.
-
-Run file.  Not what we wanted.  
-
-$rm stats*
-
-One of the much-touted reasons for version control is that you can’t break things.  So let’s break some things and see what happens.  
-
-$ls
-
-$git diff
-
-(can use HEAD or filename, but don’t have to)
-
-Our magic command is going to be called “checkout” - to change metaphors, 
-if we think of the commits as editions of a book on a shelf, we’re checking out a previous version.  
-Caution: not including filename does different things, so you really want to think of this as reverting one file at a time. 
- 
-$git checkout HEAD stats-script.sh
-
-Look at your file.  Is it back to the way it was before?  
-Let’s see what’s happening:
-
-$git status
-
-What if we want to go back to an earlier file, either for reference or because we like it better or we broke something, 
-but we already committed our changes?  Same process!
-
-$git log --oneline
-$git checkout (commithash) (filename)
-$git status
-
-If we want to keep this file the way it is (or was) we need to make a new commit.  So:
-
-$git commit -m "restoring script file"
-
-Make sure you checkout the file BEFORE the problem commit, if you’re fixing something.  
-
-What happens if we checkout an old commmit?  
-
-### Branching (checkout part 2) 
-
-We want to go back and retool our output script again, but we don't want to lose our current version of the script.  
-
-$git checkout (commithash)
-
-$git branch new-output
-
-$git checkout new-output
-
-Edit script: add mkdir $1 and >> $1/stats-$filename
-
-Draw a diagram on the board.  We can make changes in one branch independently of the other.  
-
-$git checkout master
-
-### Merging
-
-Want to merge branches.  
-
-$git merge new-output
-
-Fix up stats script
-
-$git add stats-script.sh
-
-$git commit -m "merging in new output files"
-
-(pcottle app)
-
-> Talk about workflows (commit early, commit often or branch, edit, commit, merge)
-
-> Longer break (10:30 - 11:00), make sure everyone has github account
+> Take a quick 4 minute break, have them describe the processes we've discussed.  Then have them diagram.  
 
 ##Git Remote
 
@@ -322,55 +256,87 @@ Add some sort of file (add/commit)
 
 ###Conflicts
 
-Review: remotes, pushing, pulling // fork.  Draw a diagram on the board.  
-Get everyone into original shell directory (?).  There should be a remote called origin and a 
-remote called something else in your own directory.  Have everyone pull from her directory, push to backup
+Instructions in "exercises" file.  Edit own, push.  Edit others, try to push.  Pull, hopefully conflict is generated.  
 
-$git push backup master
+	nano paper.txt
+	
+See the weird symbols here?  That's git's way of telling you that it's confused.  Unfortunately there's no nicely automated way to do this...you have to go through manually and select which bits you want to keep and which you want to throw away.  
 
-$git pull origin master
+##Optional Material (Local)
 
-Create conflict
+### Restoring Files (checkout part one)
 
-Have everyone make a change in notes document, recall, you have to commit your changes. 
-Instructions in etherpad:
+Change script, to multiple output files: `python goostats.py $datafile > stats-$datafile`, commit changes.
 
-1. Make a change in notes.txt - delete or add
-2. Stage + commit 
+Run file.  (`bash stats-script.sh`) Not what we wanted.  One of the much-touted reasons for version control is that you can’t break things.  So let’s break some things and see what happens.  
 
-$git add notes.txt, 
-$git commit -m “my notes”
-$git pull origin master
+$rm stats*
 
-If everyone edited the same document, this will be a conflict.  
-
-Try to push changes to Lynne’s repo.  
-
-$git push origin master
-
-Should fail.  Need to pull first.  
-Resolve conflicts
-
-$git pull is a combination of fetch + merge.  It’s the merge that we need to deal with now.  
-If you’re in GitBash, you’ll see (master|MERGING) - that indicates that we’re in the middle of a merge.  
-Let’s see where the conflicts are:
+$ls
 
 $git diff
 
+(can use HEAD or filename, but don’t have to)
+
+Our magic command is going to be called “checkout” - to change metaphors, 
+if we think of the commits as editions of a book on a shelf, we’re checking out a previous version.  
+Caution: not including filename does different things, so you really want to think of this as reverting one file at a time. 
+
+$git checkout HEAD stats-script.sh
+
+Look at your file.  Is it back to the way it was before?  
+Let’s see what’s happening:
+
 $git status
 
-Open that document.  
+What if we want to go back to an earlier file, either for reference or because we like it better or we broke something, 
+but we already committed our changes?  Same process!
 
-$notepad notes.txt
+$git log --oneline
+$git checkout (commithash) (filename)
+$git status
 
-Git has put in some filler text.  
-The cheap and easy way to resolve is just commit as is - do git add file and git commit -m “lazy merge”.  But that’s not actually what we want to do.  Edit the file so that it contains what you want.  You can pick among changes or make other changes.  Up to you.  Now add/commit.  
+If we want to keep this file the way it is (or was) we need to make a new commit.  So:
 
-$git add notes.txt
+$git commit -m "restoring script file"
 
-$git commit -m “merging haiku document.”
+Make sure you checkout the file BEFORE the problem commit, if you’re fixing something.  
 
-same process as before.  
+What happens if we checkout an old commmit?  
+
+### Branching (checkout part 2) 
+
+We want to go back and retool our output script again, but we don't want to lose our current version of the script.  
+
+$git checkout (commithash)
+
+$git branch new-output
+
+$git checkout new-output
+
+Edit script: add mkdir $1 and >> $1/stats-$filename
+
+Draw a diagram on the board.  We can make changes in one branch independently of the other.  
+
+$git checkout master
+
+### Merging
+
+Want to merge branches.  
+
+$git merge new-output
+
+Fix up stats script
+
+$git add stats-script.sh
+
+$git commit -m "merging in new output files"
+
+(pcottle app)
+
+> Talk about workflows (commit early, commit often or branch, edit, commit, merge)
+
+##Optional Material (Remote)
 
 ###Collaborating via pull request
 
@@ -425,10 +391,10 @@ what are the two ways to link a local/remote? (use remote add or clone)
 have worksheet?  
 
 ## Resources
-branching app: http://pcottle.github.io/learnGitBranching/?NODEMO
-atlassian: https://www.atlassian.com/git/tutorial/git-basics
-git site: http://git-scm.com/
-GUI interfaces - http://git-scm.com/downloads/guis
-SWC site: http://software-carpentry.org/v5/novice/git/01-backup.html
-diff visualizers, like https://sourcegear.com/diffmerge/
-starlogs.net
+*branching app: http://pcottle.github.io/learnGitBranching/?NODEMO
+*atlassian: https://www.atlassian.com/git/tutorial/git-basics
+*git site: http://git-scm.com/
+*GUI interfaces:  http://git-scm.com/downloads/guis
+*SWC site: http://software-carpentry.org/
+*diff visualizers, like https://sourcegear.com/diffmerge/
+* starlogs.net
