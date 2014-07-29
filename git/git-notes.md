@@ -72,15 +72,15 @@ $git add git-commands.md
 
 This adds modified files (the “changeset”) to our staging area (standing up)
 
-$git status
+	$git status
 
-$git add -A
+	$git add -A
 
-$git commit -m “initializing repository”
+	$git commit -m “initializing repository”
 
 Finally, this takes a snapshot, committing an image of all the files in the staging area (me taking a picture).
 
-$git status
+	$git status
 
 The goostats script produces multiple numbers
 
@@ -112,10 +112,11 @@ Commits have labels, just like my demo in the beginning.
 In the same way that my camera automatically assigns names to my photos, 
 the computer assigns a specific commit tag to each commit.  Let’s look at them.  
 
-$git log
+	$git log
+
 That’s a bit wordy though.  For the short version, use: 
 
-$git log --oneline
+	$git log --oneline
 
 There’s the labels.  
 
@@ -128,53 +129,55 @@ We can actually do this with a git command.
 
 Add filename to output sequence  `echo $datafile >> output.txt`
 
-$git diff
+	$git diff
 
-$git diff HEAD
+	$git diff HEAD
 
-$git diff HEAD (filename)
+	$git diff HEAD (filename)
 
 Now let’s commit our changes
 
-$git add stats-script.sh
+	$git add stats-script.sh
 
-$git commit -m “Adding output files”
+	$git commit -m “Adding output files”
 
 Let’s compare the previous revision (HEAD~1) w/ the first revision.  
-$git diff (commitval)  HEAD~1 (filename)
-$git diff (commitval)  HEAD~1
-$git diff HEAD~1 (commitval)  
+	$git diff (commitval)  HEAD~1 (filename)
+	
+	$git diff (commitval)  HEAD~1
+	
+	$git diff HEAD~1 (commitval)  
 
 ###Ignoring Files
 
 Run our script - produces an output file
 
-$git status
+	$git status
 
 Final small task - maybe there are some files you don’t want to be tracking or versioning.  
 Common examples: auxiliary files, automatically generated, etc.  
 
 We can tell git to ignore these files by creating, appropriately enough, a file called “.gitignore.”  
 
-$notepad .gitignore
+	$notepad .gitignore
 
 add text and save
 
-$git status
+	$git status
 
-$git add .gitignore
+	$git add .gitignore
 
-$git commit -m
+	$git commit -m
 
 run script on different file
 
-$git status
+	$git status
 
 We can see that the file is not being tracked.  If you change the .gitignore file to remove the filename, it will be tracked again.  
 
 Word to the wise: hard to untrack a file once it’s been tracked.  Do this right away! 
 
-> Take a quick 4 minute break, have them describe the processes we've discussed.  Then have them diagram.  
+> Take a quick 4 minute break, do review activity  
 
 ##Git Remote
 
@@ -185,7 +188,7 @@ Recap where we've been.  Now we're going to move online - like google documents 
 Two ways to make a repository on the github site: forking or a new directory.  
 The major difference is whether it starts as empty or not, and its link with its “parent” directory.  
 
-Create repository on github WITH README.  Look at address.  
+Create repository on github without readme.  Look at address.  
 
 $git remote add (name) (address)
 
@@ -200,14 +203,14 @@ $git remote -v
 ###Syncing files
 
 Great, now we’ve set up a remote but we need to get them to talk to each other.  
-Like they have each other’s number but now they need to be able to call each other.  
+Like they have each other’s number or we've laid a telephone line but now they need to call each other.  
 We do this with push/pull commands.  To push your files to the “upstream” repository, just do: 
 
 ~~~
 $git push upstream master
 ~~~
 
-> Project thing
+Edit the readme online.  
 
 ~~~
 $git pull upstream master
