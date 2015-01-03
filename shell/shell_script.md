@@ -5,6 +5,9 @@
 $git clone https://github.com/ChristinaLK/2015-01-05-wise-cuboulder
 ~~~
 
+Tabs to have open: etherpad, exercise link, lesson (if you want)
+and terminal, obviously.  
+
 ##Intro + motivation (10 min)
 
 A shell is just a different way of doing many of the things you would accomplish w/ clicking or using keyboard shortcuts on a visual interface.  
@@ -219,7 +222,9 @@ There are a BUNCH more commands we can run, plus, options.
 
 How to find out about these commands: `$man` or google.  
 
-> Assignment: find out about this command, give us an example of using it, possibly with an option, and what it might be useful for.  
+> Give example of a bunch of commands, talk out the syntax
+
+> Copy commands to etherpad, have people take notes
 
 * less
 * cat
@@ -230,9 +235,11 @@ How to find out about these commands: `$man` or google.
 * wc
 * sort
 
-Talk about command syntax
+> Assignment: find out about this command, tell us what this would do, other options, why it might be useful.  
 
-> slide: based on what we just talked about, what would you guess this command is?  (use cut,  + python)
+> quiz: based on what we just talked about, what would you guess this command is?  (use cut)
+
+[link](https://github.com/ChristinaLK/algorithms-seminar/tree/master/asst01)
 
 ##Intro to "part 2"
 
@@ -317,8 +324,7 @@ Talk about that solution, run on pdb directory, to demonstrate.
 
 ##Scripts (25 min)
 
-> Describe three good reasons for saving code in a script.
-
+> Describe three reasons why you might save code in a script.
 
 We can now "save our work" by putting everything we've done so far into a "script" - actually a program, but I'll probably mostly use the word script.  In our molecules directory, we'll make a document: 
 
@@ -338,7 +344,7 @@ sorting_script.sh
 Now, this script is perfectly adequate, but it's not very flexible.  We can only use it in this directory.  It would be nice to be able to use it in several directories, in particular, both molecules and pdb.  So let's do some refactoring.  And while we're at it, we'll do some nice folder organization.  
 
 ~~~ 
-cd ../../
+cd ../
 pwd
 mkdir scripts
 cp data/molecules/sorting_script.sh scripts/
