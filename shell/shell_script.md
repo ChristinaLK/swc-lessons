@@ -1,12 +1,6 @@
 #Shell Script
 
-##Git Download
-~~~
-$git clone https://github.com/ChristinaLK/2015-01-05-wise-cuboulder
-~~~
-
-Tabs to have open: etherpad, exercise link, lesson (if you want)
-and terminal, obviously.  
+Tabs to have open: etherpad and terminal. 
 
 ##Intro + motivation (10 min)
 
@@ -49,7 +43,7 @@ Now we want to see what else is in our directory with us.  The command for that 
 And finally, we want to move to a different directory.  That command is `cd` for "change directory."  
 
 ~~~
-$cd 2015-01-05-wise-cuboulder
+$cd Downloads
 ~~~
 
 And now we can look at the files in this direction. `ls`
@@ -60,26 +54,29 @@ Need to go up as well as down!  Ask veteran for path:
 
 `$cd ..`
 
+> Do some exploring - examine bits of your own file system.  
+
 Now, supposed I actually want to get to the shell lesson materials.  
 
-`$cd 2015-01-05-wise-cuboulder`
-`ls`
+> mention `cd` shortcut and `~`
 
-etc.  This is pretty laborious - it's like clicking through a bunch of windows.  Plus, we have these insanely long names.  SO, what can we do?  Let's talk "shortcuts"
+> make a directory, download zip, move there + unzip
+> find unzipped directory - look at contents, get to /nelle
 
-* `cd` w/o an argument sends you back to "home"
 * `ls` with path names
-* sandwiching path names
 * tab completion
 * briefly touch on relative vs absolute paths
+* example: `ls /usr/bin` w/o moving
 
-> Three different ways to get from /2015/novice/shell/filesystem/data/backup to nelle's molecules directory
+> Discuss: how can we get from a -> b easily?  
 
-> Make a quick diagram of nelle's directory using the command line
+> Do Challenges
 
 > Some sort of question about link between filesystems + interface -> write answers on board
 
-##Creating Things (aim for 20 min or less)
+Summarize our tools: `pwd`, `ls`, and `cd`
+
+## Creating Things (aim for 20 min or less)
 
 *   Create a directory hierarchy that matches a given diagram.
 *   Create files in that hierarchy using an editor or by copying and renaming existing files.
@@ -176,8 +173,6 @@ rmdir thesis
 
 Two ways: delete file 
 
-> clean up nelle's home directory: try to delete Desktop, move molecules, animals, solar.pdf, pizza.cfg to data, rename notes.txt to to_do.txt
-
 Let's talk about options first. 
 
 ~~~
@@ -202,11 +197,6 @@ cp *.pdb originals/
 
 > again ask: what is different about making/moving/copying files in this way?  
 
---------------
-
-> Break
-
--------------
 
 ##Command line commands (at least 15 min)
 
@@ -226,20 +216,24 @@ How to find out about these commands: `$man` or google.
 
 > Copy commands to etherpad, have people take notes
 
+* echo
 * less
 * cat
 * head
 * (tail)
 * grep
-* echo
 * wc
 * sort
+* uniq
+* find
 
 > Assignment: find out about this command, tell us what this would do, other options, why it might be useful.  
 
 > quiz: based on what we just talked about, what would you guess this command is?  (use cut)
 
 [link](https://github.com/ChristinaLK/algorithms-seminar/tree/master/asst01)
+
+#BREAK
 
 ##Intro to "part 2"
 
@@ -321,6 +315,420 @@ Talk about that solution, run on pdb directory, to demonstrate.
 > Bunch o' exercises?  
 
 > Ask question: how would this be useful to you in your research?  
+
+##For loops
+
+In this example,
+we'll use the `creatures` directory which only has two example files,
+but the principles can be applied to many many more files at once.
+We would like to modify these files, but also save a version of the original files and rename them 
+as `original-basilisk.dat` and `original-unicorn.dat`.
+We can't use:
+
+~~~ {.bash}
+$ mv *.dat original-*.dat
+~~~
+
+because that would expand to:
+
+~~~ {.bash}
+$ mv basilisk.dat unicorn.dat original-*.dat
+~~~
+
+This wouldn't back up our files, instead we get an error
+
+~~~ {.error}
+mv: target `original-*.dat' is not a directory
+~~~
+
+This a problem arises when `mv` receives more than two inputs. When this happens, it
+expects the last input to be a directory where it can move all the files it was passed.
+Since there is no directory named `original-*.dat` in the `creatures` directory we get an
+error.
+
+Instead, we can use a **loop**
+to do some operation once for each thing in a list.
+Here's a simple example that displays the first three lines of each file in turn:
+
+~~~ {.bash}
+$ for filename in basilisk.dat unicorn.dat
+> do
+>    head -3 $filename
+> done
+~~~
+~~~ {.output}
+COMMON NAME: basilisk
+CLASSIFICATION: basiliscus vulgaris
+UPDATED: 1745-05-02
+COMMON NAME: unicorn
+CLASSIFICATION: equus monoceros
+UPDATED: 1738-11-24
+~~~
+
+When the shell sees the keyword `for`,
+it knows it is supposed to repeat a command (or group of commands) once for each thing in a list.
+In this case, the list is the two filenames.
+Each time through the loop,
+the name of the thing currently being operated on is assigned to
+the **variable** called `filename`.
+Inside the loop,
+we get the variable's value by putting `$` in front of it:
+`$filename` is `basilisk.dat` the first time through the loop,
+`unicorn.dat` the second,
+and so on.
+
+By using the dollar sign we are telling the shell interpreter to treat
+`filename` as a variable name and substitute its value on its place,
+but not as some text or external command. When using variables it is also 
+possible to put the names into curly braces to clearly delimit the variable
+name: `$filename` is equivalent to `${filename}`, but is different from
+`${file}name`. You may find this notation in other people's programs.
+
+Finally,
+the command that's actually being run is our old friend `head`,
+so this loop prints out the first three lines of each data file in turn.
+
+> ## Follow the Prompt {.callout}
+>
+> The shell prompt changes from `$` to `>` and back again as we were
+> typing in our loop. The second prompt, `>`, is different to remind
+> us that we haven't finished typing a complete command yet.
+
+We have called the variable in this loop `filename`
+in order to make its purpose clearer to human readers.
+The shell itself doesn't care what the variable is called;
+if we wrote this loop as:
+
+~~~ {.bash}
+for x in basilisk.dat unicorn.dat
+do
+    head -3 $x
+done
+~~~
+
+or:
+
+~~~ {.bash}
+for temperature in basilisk.dat unicorn.dat
+do
+    head -3 $temperature
+done
+~~~
+
+it would work exactly the same way.
+*Don't do this.*
+Programs are only useful if people can understand them,
+so meaningless names (like `x`) or misleading names (like `temperature`)
+increase the odds that the program won't do what its readers think it does.
+
+Here's a slightly more complicated loop:
+
+~~~ {.bash}
+for filename in *.dat
+do
+    echo $filename
+    head -100 $filename | tail -20
+done
+~~~
+
+The shell starts by expanding `*.dat` to create the list of files it will process.
+The **loop body**
+then executes two commands for each of those files.
+The first, `echo`, just prints its command-line parameters to standard output.
+For example:
+
+~~~ {.bash}
+$ echo hello there
+~~~
+
+prints:
+
+~~~ {.output}
+hello there
+~~~
+
+In this case,
+since the shell expands `$filename` to be the name of a file,
+`echo $filename` just prints the name of the file.
+Note that we can't write this as:
+
+~~~ {.bash}
+for filename in *.dat
+do
+    $filename
+    head -100 $filename | tail -20
+done
+~~~
+
+because then the first time through the loop,
+when `$filename` expanded to `basilisk.dat`, the shell would try to run `basilisk.dat` as a program.
+Finally,
+the `head` and `tail` combination selects lines 81-100 from whatever file is being processed.
+
+> ## Spaces in Names {.callout}
+> 
+> Filename expansion in loops is another reason you should not use spaces in filenames.
+> Suppose our data files are named:
+> 
+> ~~~
+> basilisk.dat
+> red dragon.dat
+> unicorn.dat
+> ~~~
+> 
+> If we try to process them using:
+> 
+> ~~~
+> for filename in *.dat
+> do
+>     head -100 $filename | tail -20
+> done
+> ~~~
+> 
+> then the shell will expand `*.dat` to create:
+> 
+> ~~~
+> basilisk.dat red dragon.dat unicorn.dat
+> ~~~
+> 
+> With older versions of Bash,
+> or most other shells,
+> `filename` will then be assigned the following values in turn:
+> 
+> ~~~
+> basilisk.dat
+> red
+> dragon.dat
+> unicorn.dat
+> ~~~
+>
+> That's a problem: `head` can't read files called `red` and `dragon.dat`
+> because they don't exist,
+> and won't be asked to read the file `red dragon.dat`.
+> 
+> We can make our script a little bit more robust
+> by **quoting** our use of the variable:
+> 
+> ~~~
+> for filename in *.dat
+> do
+>     head -100 "$filename" | tail -20
+> done
+> ~~~
+>
+> but it's simpler just to avoid using spaces (or other special characters) in filenames.
+
+Going back to our original file renaming problem,
+we can solve it using this loop:
+
+~~~ {.bash}
+for filename in *.dat
+do
+    mv $filename original-$filename
+done
+~~~
+
+This loop runs the `mv` command once for each filename.
+The first time,
+when `$filename` expands to `basilisk.dat`,
+the shell executes:
+
+~~~ {.bash}
+mv basilisk.dat original-basilisk.dat
+~~~
+
+The second time, the command is:
+
+~~~ {.bash}
+mv unicorn.dat original-unicorn.dat
+~~~
+
+> ## Measure Twice, Run Once {.callout}
+> 
+> A loop is a way to do many things at once --- or to make many mistakes at
+> once if it does the wrong thing. One way to check what a loop *would* do
+> is to echo the commands it would run instead of actually running them.
+> For example, we could write our file renaming loop like this:
+> 
+> ~~~
+> for filename in *.dat
+> do
+>     echo mv $filename original-$filename
+> done
+> ~~~
+> 
+> Instead of running `mv`, this loop runs `echo`, which prints out:
+> 
+> ~~~
+> mv basilisk.dat original-basilisk.dat
+> mv unicorn.dat original-unicorn.dat
+> ~~~
+> 
+> *without* actually running those commands. We can then use up-arrow to
+> redisplay the loop, back-arrow to get to the word `echo`, delete it, and
+> then press "enter" to run the loop with the actual `mv` commands. This
+> isn't foolproof, but it's a handy way to see what's going to happen when
+> you're still learning how loops work.
+
+## Nelle's Pipeline: Processing Files
+
+Nelle is now ready to process her data files.
+Since she's still learning how to use the shell,
+she decides to build up the required commands in stages.
+Her first step is to make sure that she can select the right files --- remember,
+these are ones whose names end in 'A' or 'B', rather than 'Z'. Starting from her home directory, Nelle types:
+
+~~~ {.bash}
+$ cd north-pacific-gyre/2012-07-03
+$ for datafile in *[AB].txt
+> do
+>     echo $datafile
+> done
+~~~
+~~~ {.output}
+NENE01729A.txt
+NENE01729B.txt
+NENE01736A.txt
+...
+NENE02043A.txt
+NENE02043B.txt
+~~~
+
+Her next step is to decide
+what to call the files that the `goostats` analysis program will create.
+Prefixing each input file's name with "stats" seems simple,
+so she modifies her loop to do that:
+
+~~~ {.bash}
+$ for datafile in *[AB].txt
+> do
+>     echo $datafile stats-$datafile
+> done
+~~~
+~~~ {.output}
+NENE01729A.txt stats-NENE01729A.txt
+NENE01729B.txt stats-NENE01729B.txt
+NENE01736A.txt stats-NENE01736A.txt
+...
+NENE02043A.txt stats-NENE02043A.txt
+NENE02043B.txt stats-NENE02043B.txt
+~~~
+
+She hasn't actually run `goostats` yet,
+but now she's sure she can select the right files and generate the right output filenames.
+
+Typing in commands over and over again is becoming tedious,
+though,
+and Nelle is worried about making mistakes,
+so instead of re-entering her loop,
+she presses the up arrow.
+In response,
+the shell redisplays the whole loop on one line
+(using semi-colons to separate the pieces):
+
+~~~ {.bash}
+$ for datafile in *[AB].txt; do echo $datafile stats-$datafile; done
+~~~
+
+Using the left arrow key,
+Nelle backs up and changes the command `echo` to `goostats`:
+
+~~~ {.bash}
+$ for datafile in *[AB].txt; do bash goostats $datafile stats-$datafile; done
+~~~
+
+When she presses enter,
+the shell runs the modified command.
+However, nothing appears to happen --- there is no output.
+After a moment, Nelle realizes that since her script doesn't print anything to the screen any longer,
+she has no idea whether it is running, much less how quickly.
+She kills the job by typing Control-C,
+uses up-arrow to repeat the command,
+and edits it to read:
+
+~~~ {.bash}
+$ for datafile in *[AB].txt; do echo $datafile; bash goostats $datafile stats-$datafile; done
+~~~
+
+> ## Beginning and End {.callout}
+>
+> We can move to the beginning of a line in the shell by typing `^A`
+> (which means Control-A)
+> and to the end using `^E`.
+
+When she runs her program now,
+it produces one line of output every five seconds or so:
+
+~~~ {.output}
+NENE01729A.txt
+NENE01729B.txt
+NENE01736A.txt
+...
+~~~
+
+1518 times 5 seconds,
+divided by 60,
+tells her that her script will take about two hours to run.
+As a final check,
+she opens another terminal window,
+goes into `north-pacific-gyre/2012-07-03`,
+and uses `cat stats-NENE01729B.txt`
+to examine one of the output files.
+It looks good,
+so she decides to get some coffee and catch up on her reading.
+
+##Scripts - Nelle
+
+~~~
+# Calculate reduced stats for data files at J = 100 c/bp.
+for datafile in "$@"
+do
+    echo $datafile
+    bash goostats -J 100 -r $datafile stats-$datafile
+done
+~~~
+
+(The parameters `-J 100` and `-r` are the ones her supervisor said she should have used.)
+She saves this in a file called `do-stats.sh`
+so that she can now re-do the first stage of her analysis by typing:
+
+~~~ {.bash}
+$ bash do-stats.sh *[AB].txt
+~~~
+
+She can also do this:
+
+~~~ {.bash}
+$ bash do-stats.sh *[AB].txt | wc -l
+~~~
+
+so that the output is just the number of files processed
+rather than the names of the files that were processed.
+
+One thing to note about Nelle's script is that
+it lets the person running it decide what files to process.
+She could have written it as:
+
+~~~
+# Calculate reduced stats for  A and Site B data files at J = 100 c/bp.
+for datafile in *[AB].txt
+do
+    echo $datafile
+    bash goostats -J 100 -r $datafile stats-$datafile
+done
+~~~
+
+The advantage is that this always selects the right files:
+she doesn't have to remember to exclude the 'Z' files.
+The disadvantage is that it *always* selects just those files --- she can't run it on all files
+(including the 'Z' files),
+or on the 'G' or 'H' files her colleagues in Antarctica are producing,
+without editing the script.
+If she wanted to be more adventurous,
+she could modify her script to check for command-line parameters,
+and use `*[AB].txt` if none were provided.
+Of course, this introduces another tradeoff between flexibility and complexity.
+
 
 ##Scripts (25 min)
 
