@@ -28,8 +28,9 @@ html, body {
 
 .slide {
   width: auto;
-  min-height: 100%;
+  min-height: 90%;
   position: relative;
+  vertical-align: center;
 }
 
 .deck-before, .deck-previous, .deck-next, .deck-after {
