@@ -4,10 +4,6 @@ html, body {
   margin: 0;
 }
 
-h1,h2,h3 {
-  text-align: center;
-  }
-
 .deck-container {
   position: relative;
   min-height: 100%;
@@ -31,8 +27,9 @@ h1,h2,h3 {
 }
 
 .slide {
-  width: 70%;
-  min-height: 90%;
+  width: auto;
+  min-height: 100%;
+  position: relative;
 }
 
 .deck-before, .deck-previous, .deck-next, .deck-after {
