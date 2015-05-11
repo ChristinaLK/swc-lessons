@@ -43,7 +43,7 @@ Now we want to see what else is in our directory with us.  The command for that 
 And finally, we want to move to a different directory.  That command is `cd` for "change directory."  
 
 ~~~
-$cd Downloads
+$cd Desktop
 ~~~
 
 And now we can look at the files in this direction. `ls`
@@ -54,21 +54,31 @@ Need to go up as well as down!  Ask veteran for path:
 
 `$cd ..`
 
-> Do some exploring - examine bits of your own file system.  
+The `cd` command on its own will take you back to the home directory.  If you 
+get lost, just go back there.  Also, `ls` can have arguments.  And tab completion.  
 
 Now, supposed I actually want to get to the shell lesson materials.  
 
-> mention `cd` shortcut and `~`
+> put directions up!!
 
 > make a directory, download zip, move there + unzip
+
 > find unzipped directory - look at contents, get to /nelle
 
-* `ls` with path names
-* tab completion
-* briefly touch on relative vs absolute paths
-* example: `ls /usr/bin` w/o moving
+> try to draw a quick sketch of her directory
 
-> Discuss: how can we get from a -> b easily?  
+* briefly touch on relative vs absolute paths
+* `cd` into creatures, demo `ls` w/ molecules
+* example: `ls /Users/` w/o moving
+
+Let's talk about options first. 
+
+~~~
+$ ls -l 
+$ ls -l -a
+$ ls -la
+$ ls -lah
+~~~
 
 > Do Challenges
 
@@ -87,6 +97,8 @@ Summarize our tools: `pwd`, `ls`, and `cd`
 We now know how to explore files and directories, but how do we create them in the first place? Let's go back to Nelle's home directory.  
 
 Let's create a new directory called `thesis`
+
+> Open folder to show this!  
 
 ~~~
 $ mkdir thesis
@@ -173,15 +185,6 @@ rmdir thesis
 
 Two ways: delete file 
 
-Let's talk about options first. 
-
-~~~
-$ ls -l 
-$ ls -l -a
-$ ls -la
-$ ls -lah
-~~~
-
 Also, `rm -r` to delete the Desktop directory
 
 The beautiful thing about options is that there is usually some consistency - something like -f is usually force, -r is recursive, -a is all and so on, -h is human readable and -v is verbose.
@@ -255,7 +258,7 @@ less greeting.txt
 What happens if you redirect a different phrase to the same document?  To concatenate, do this: 
 
 ~~~
-echo "- Call mom" >> to_do.txt
+echo "- Call mom" >> notes.txt
 ~~~
 
 > save your history and put it in the novice/shell/ folder
@@ -388,11 +391,6 @@ Finally,
 the command that's actually being run is our old friend `head`,
 so this loop prints out the first three lines of each data file in turn.
 
-> ## Follow the Prompt {.callout}
->
-> The shell prompt changes from `$` to `>` and back again as we were
-> typing in our loop. The second prompt, `>`, is different to remind
-> us that we haven't finished typing a complete command yet.
 
 We have called the variable in this loop `filename`
 in order to make its purpose clearer to human readers.
@@ -465,59 +463,6 @@ when `$filename` expanded to `basilisk.dat`, the shell would try to run `basilis
 Finally,
 the `head` and `tail` combination selects lines 81-100 from whatever file is being processed.
 
-> ## Spaces in Names {.callout}
-> 
-> Filename expansion in loops is another reason you should not use spaces in filenames.
-> Suppose our data files are named:
-> 
-> ~~~
-> basilisk.dat
-> red dragon.dat
-> unicorn.dat
-> ~~~
-> 
-> If we try to process them using:
-> 
-> ~~~
-> for filename in *.dat
-> do
->     head -100 $filename | tail -20
-> done
-> ~~~
-> 
-> then the shell will expand `*.dat` to create:
-> 
-> ~~~
-> basilisk.dat red dragon.dat unicorn.dat
-> ~~~
-> 
-> With older versions of Bash,
-> or most other shells,
-> `filename` will then be assigned the following values in turn:
-> 
-> ~~~
-> basilisk.dat
-> red
-> dragon.dat
-> unicorn.dat
-> ~~~
->
-> That's a problem: `head` can't read files called `red` and `dragon.dat`
-> because they don't exist,
-> and won't be asked to read the file `red dragon.dat`.
-> 
-> We can make our script a little bit more robust
-> by **quoting** our use of the variable:
-> 
-> ~~~
-> for filename in *.dat
-> do
->     head -100 "$filename" | tail -20
-> done
-> ~~~
->
-> but it's simpler just to avoid using spaces (or other special characters) in filenames.
-
 Going back to our original file renaming problem,
 we can solve it using this loop:
 
@@ -543,32 +488,7 @@ The second time, the command is:
 mv unicorn.dat original-unicorn.dat
 ~~~
 
-> ## Measure Twice, Run Once {.callout}
-> 
-> A loop is a way to do many things at once --- or to make many mistakes at
-> once if it does the wrong thing. One way to check what a loop *would* do
-> is to echo the commands it would run instead of actually running them.
-> For example, we could write our file renaming loop like this:
-> 
-> ~~~
-> for filename in *.dat
-> do
->     echo mv $filename original-$filename
-> done
-> ~~~
-> 
-> Instead of running `mv`, this loop runs `echo`, which prints out:
-> 
-> ~~~
-> mv basilisk.dat original-basilisk.dat
-> mv unicorn.dat original-unicorn.dat
-> ~~~
-> 
-> *without* actually running those commands. We can then use up-arrow to
-> redisplay the loop, back-arrow to get to the word `echo`, delete it, and
-> then press "enter" to run the loop with the actual `mv` commands. This
-> isn't foolproof, but it's a handy way to see what's going to happen when
-> you're still learning how loops work.
+> `echo` trick
 
 ## Nelle's Pipeline: Processing Files
 
@@ -764,7 +684,7 @@ Edit the script so that there's a path before the *.pdb.  Replace it with $1.  S
 bash sorting_script.sh ../data/molecules
 ~~~
 
-What if we wanted to be able to do this for not just pdb files?  What if we had a directory of text files?  Change the argument again.  Again, discuss location in the filesystem.  Maybe talk about $*?  
+What if we wanted to be able to do this for not just pdb files?  What if we had a directory of text files?  Change the argument again.  Again, discuss location in the filesystem.  Maybe talk about $@?  
 
 > Ask: what is missing?  
 
