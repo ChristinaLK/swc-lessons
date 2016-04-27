@@ -22,7 +22,8 @@ Explain different ways to run python:
 * in python console (demo briefly)
 * as script
 
-Create script file called `readings.py` in text editor, and have "hello world" example
+Create script file called `readings.py` in text editor, save in 
+directory w/ all the inflammation files, and have "hello world" example
 as initial code:
 ~~~
 print("hello world")
@@ -48,7 +49,11 @@ value = data.mean(axis = 1)
 print(value)
 ~~~
 
-Works - commit it.  
+Does it work?  
+~~~
+$ python readings.py
+~~~
+Commit it.  
 ~~~
 $ git add readings.py
 $ git commit -m "finding the mean of one file"
@@ -74,7 +79,7 @@ value = data.mean(axis = 1)
 print(value)
 ~~~
 
-Test it out.  WHat happens with no filename?  WIth one filename?  WIth random args?
+Test it out.  What happens with no filename?  With one filename?  With random args?
 ~~~
 $ python readings.py
 $ python readings.py inflammation-01.csv
