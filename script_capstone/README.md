@@ -1,8 +1,8 @@
 # "Capstone" Material
 
-> This exercise can be done after the initial SWC lessons on python, shell and git.  
-> It assumes that writing python scripts (outside the notebook) was not covered 
-> in the teaching of the python section.  
+This exercise can be done after the initial SWC lessons on python, shell and git.  
+It assumes that writing python scripts (outside the notebook) was not covered 
+in the teaching of the python section.  
 
 ## Informal Script + Commands
 
@@ -13,8 +13,8 @@ Have a plaintext editor open, and
 start in the same python-novice-inflammation data folder as yesterday.  
 
 ~~~
-cd ~/Desktop/python-novice-inflammation/data
-ls
+$ cd ~/Desktop/python-novice-inflammation/data
+$ ls
 ~~~
 
 Explain different ways to run python: 
@@ -22,20 +22,21 @@ Explain different ways to run python:
 * in python console (demo briefly)
 * as script
 
-Create script file called `readings.py` in text editor, and have "hello world" example:
+Create script file called `readings.py` in text editor, and have "hello world" example
+as initial code:
 ~~~
 print("hello world")
 ~~~
 ~~~
-python readings.py
+$ python readings.py
 ~~~
 
 Sidebar: would normally comment out that "hello world" line or delete it.  Another 
 way to save is make the directory a repository.  Do that + commit file.  
 ~~~
-git init
-git add readings.py
-git commit -m "hello world statement"
+$ git init
+$ git add readings.py
+$ git commit -m "hello world statement"
 ~~~
 
 Now make changes.  
@@ -49,14 +50,14 @@ print(value)
 
 Works - commit it.  
 ~~~
-git add readings.py
-git commit -m "finding the mean of one file"
+$ git add readings.py
+$ git commit -m "finding the mean of one file"
 ~~~
 
 Next, explain command line syntax.  Want to be able to pass filename into 
 file instead of hard coding, like so: 
 ~~~
-python readings.py inflammation-01.csv
+$ python readings.py inflammation-01.csv
 ~~~
 
 To do that, need library: 
@@ -75,17 +76,17 @@ print(value)
 
 Test it out.  WHat happens with no filename?  WIth one filename?  WIth random args?
 ~~~
-python readings.py
-python readings.py inflammation-01.csv
-python readings.py inflammation-01.csv apples cherries
+$ python readings.py
+$ python readings.py inflammation-01.csv
+$ python readings.py inflammation-01.csv apples cherries
 ~~~
 
 What *is* sys.argv?  (a list of strings)
 
 Commit changes.  
 ~~~
-git add readings.py
-git commit -m "using sys library"
+$ git add readings.py
+$ git commit -m "using sys library"
 ~~~
 
 Which element of the list is the filename?  (index: 1)
@@ -106,9 +107,9 @@ print(value)
 
 Try running it - it should work, commit changes.  
 ~~~
-python readings.py inflammation-01.csv
-git add readings.py
-git commit -m "using sys library"
+$ python readings.py inflammation-01.csv
+$ git add readings.py
+$ git commit -m "using sys library"
 ~~~
 
 Now clean up script, putting stuff into a function: 
@@ -129,14 +130,14 @@ reading(filename)
 
 Check if it works, commit.  
 ~~~
-python readings.py inflammation-01.csv
-git add readings.py
-git commit -m "moved analysis into function"
+$ python readings.py inflammation-01.csv
+$ git add readings.py
+$ git commit -m "moved analysis into function"
 ~~~
 
 Add options - want to enter this on command line: 
 ~~~
-python readings.py --mean inflammation-01.csv
+$ python readings.py --mean inflammation-01.csv
 ~~~
 
 What needs to be changed?  First, in sys.argv, then, adding conditional statement 
@@ -160,9 +161,9 @@ reading(filename)
 
 Check if it works, commit: 
 ~~~
-python readings.py --mean inflammation-01.csv
-git add readings.py
-git commit -m "added mean option"
+$ python readings.py --mean inflammation-01.csv
+$ git add readings.py
+$ git commit -m "added mean option"
 ~~~
 
 Students can do the following exercise.  Green stickies go up once they've done 
@@ -201,8 +202,8 @@ reading(filename)
 ~~~
 
 ~~~
-git add readings.py
-git commit -m "added std deviation option and error message"
+$ git add readings.py
+$ git commit -m "added std deviation option and error message"
 ~~~
 
 Finally, loops.  Can do a bash loop and/or a loop inside the script.  Bash loop 
@@ -241,8 +242,8 @@ for file in filenames:
 
 Commit changes (if any): 
 ~~~
-git add readings.py
-git commit -m "added loop"
+$ git add readings.py
+$ git commit -m "added loop"
 ~~~
 
 Exercise: I had students do the following (before optional), and then, when I brought 
@@ -256,6 +257,8 @@ what they mean and why you'd do them.
 > * Create a `code` subdirectory.  
 > * Move script and notebook to `code` directory.  
 > * Rename your notebook to something more descriptive.  
+> * Create a `data` subdirectory
+> * Move data files to `data`.  
 > * Commit changes
 > * Create a README file.  
 > * Commit changes.  
@@ -289,3 +292,12 @@ script with lots of options, would use a library for that instead of crude cond.
 you to choose which axis you're running on.  
 * I was inconsistent - I used `filename` as an argument to the function, but not 
 the `option`, even tho both change.  
+* Genuine typos included forgetting a colon after my function defintion.  Demonstrative 
+errors included running script w/o input file and getting index error.  
+* This took ~ 1 hr and 20 min.  
+* I had people use plaintext editors of choice and that didn't seem to throw anyone 
+for a loop, really.  
+* Screen real estate is hard - I had to have everything big enough to be seen, which 
+meant that I couldn't have each window (shell/editor) on half the screen, which 
+would have been better.  You don't need much shell real estate, since you're just 
+running the same command over and over.  
