@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <title>Welcome to Software Carpentry</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/style/swiss.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide">
+      <h1>Welcome to Software Carpentry</h1>
+      
+      <div align="center"><img src="http://www.data2semantics.org/bootcamp/img/software-carpentry-logo.png" width="40%" height="40%"/></div>
+    </section>
+
+    <section class="slide">
+      <h2>What are we doing here?</h2>
+    </section>
+
+    <section class="slide">
+      <h3>Software Carpentry's goal is to "teach researchers the computing skills they need to get more done in less time, and with less pain."</h3>
+    </section>
+
+    <section class="slide">
+      <h2>The Height of Functionality</h2>
+
+<iframe src="//player.vimeo.com/video/68558518" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/68558518">GIZMODO - The Wildly Functional Studio of Video Wizard Casey Neistat, Part 1</a> from <a href="http://vimeo.com/gizmodo">Gizmodo</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+    </section>
+    
+    <section class="slide">
+      <blockquote> <p>...so every minute that I spend looking for, like, velcro tape, or 
+      my drill gun, is a minute I’m not doing something productive so why not build an 
+      infrastructure that supports that rather than encourages the chaos. </p>
+	<p>The tool area looks the way it looks not because I think it looks cool but 
+	because that's the height of functionality. </p></blockquote>
+    </section>
+    
+    <section class="slide">
+      <h3>studio space for scientist, statistician, mathematician, etc... = a computer</h3>
+    </section>
+    
+    <section class="slide">
+      <h3>Today we will be learning about...</h3>
+      
+      <ul class="slide"> 
+      <li> best practices: automation, version control </li>
+	<li> tool-building: scripting, programming</li>
+	<li> tools: python, shell, git, databases </li>
+      </ul>
+      
+    <p class="slide">in order to...</p>
+<ul class="slide">
+<li> automate repetitive tasks </li>
+<li> track and share work </li>
+<li> build programs in a modular, testable, and reusable way   </li>
+      </ul>
+      
+    </section>
+    
+    <section class="slide">
+      <h2>Housekeeping</h2>
+    </section>
+    
+    <section class="slide">
+      <h3>Code of Conduct</h3>
+    </section>
+    
+    <section class="slide">
+      <h3>Schedule</h3>
+      
+      <p class="slide">Today:</p>
+      <ul class="slide"><li>Morning: Using the command line</li>
+      <li>Afternoon: Introduction to programming in python</li></ul>
+      
+      <p class="slide">
+      Tomorrow:</p>
+      <ul class="slide"><li>Morning: Version control with git</li>
+      <li>Afternoon: Dealing with data (and databases)</li></ul>
+    </section>
+    
+    <section class="slide">
+      <h3>Sticky Notes</h3>
+      
+      <p>Easy visual feedback for instructors.</p>
+
+<ul>
+<li> <font color="brown">If you are lost, confused, or need help, put the pink sticky up on your laptop.</font></li>
+<li> <font color="green">If all is well, put up the green sticky.</font></li>
+</ul>
+
+<p><i>Please ask questions immediately. If you're confused, probably someone else is as well.</i></p>
+
+
+    </section>
+    
+    <section class="slide">
+      <h3>Tools</h3>
+      
+      <p>Things you will probably want to have open:</p>
+
+<ul>
+<li> Workshop web page </li>
+<li> Workshop etherpad</li>
+<li> Command line window (terminal or git bash)</li>
+<li> Note-taking device (if desired, all material will be available online afterwards)</li>
+</ul>
+<img src="http://rebeccaberto.files.wordpress.com/2012/07/twitter-bird.jpg" width="10%" height="10%"/> If you're on twitter (not during a lesson, of course), tweet at @swcarpentry or use the hashtag #SWCUNM.  
+    </section>
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form>
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+</body>
+</html>
